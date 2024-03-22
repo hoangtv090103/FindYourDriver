@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "./configs/axios";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const [vehicleType, setVehicleType] = useState({});
@@ -9,9 +10,7 @@ function App() {
   const fetchVehicleType = () => {
     setIsLoading(true);
     axios
-      .get("http://localhost:3000/vehicle-type", {
-        timeout: 4000,
-      })
+      .get("http://localhost:3000/vehicle-type")
       .then((response) => {
         setVehicleType(response.data);
         setIsLoading(false);
@@ -22,13 +21,11 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    fetchVehicleType();
-  }, []);
+  useEffect(fetchVehicleType, []);
 
   return (
     <>
-      <div>
+      {/* <div>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
@@ -41,7 +38,8 @@ function App() {
             </ul>
           </div>
         )}
-      </div>
+      </div> */}
+      <LoginPage />
     </>
   );
 }
